@@ -33,9 +33,6 @@ fun Application.module() {
             enable(SerializationFeature.INDENT_OUTPUT) // 美化输出 JSON
         }
     }
-    val user = environment.config.property("ktor.database.user").getString()
-    val password = environment.config.property("ktor.database.password").getString()
-    Database.connect("jdbc:h2:mem:test", driver = "org.h2.Driver", user = user, password = password)
     routing {
         post ("/login"){
             val userinput = call.receive<User>()
