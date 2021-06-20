@@ -13,6 +13,8 @@ import io.ktor.client.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.engine.jetty.*
 import java.util.*
+import com.example.database.SQL.*
+import org.jetbrains.exposed.sql.Database
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -24,12 +26,16 @@ data class User(
 )
 
 
+
 fun Application.module() {
     install(ContentNegotiation) {
         jackson {
             enable(SerializationFeature.INDENT_OUTPUT) // 美化输出 JSON
         }
     }
+    val user = environment.config.property("ktor.database.user").getString()
+    val password = environment.config.property("ktor.database.password").getString()
+    Database.connect("jdbc:h2:mem:test", driver = "org.h2.Driver", user = user, password = password)
     routing {
         post ("/login"){
             val userinput = call.receive<User>()
