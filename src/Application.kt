@@ -13,8 +13,8 @@ import io.ktor.client.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.engine.jetty.*
 import java.util.*
-import com.example.database.SQL.*
-import org.jetbrains.exposed.sql.Database
+import com.example.database.*
+import org.jetbrains.exposed.sql.Database.
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -33,6 +33,7 @@ fun Application.module() {
             enable(SerializationFeature.INDENT_OUTPUT) // 美化输出 JSON
         }
     }
+    initDatabase()
     routing {
         post ("/login"){
             val userinput = call.receive<User>()
