@@ -96,8 +96,12 @@ fun Application.module() {
                         it[UserPassword] = PasswordHasher.hashPassword(UserInformation.Password).toString()
                     }
                 }
+            }catch (error: Exception){
+                call.respond(mapOf(
+                    "Fail" to true
+                ))
             }
-            
+
             call.respond(mapOf(
                 "OK" to true
             ))
