@@ -12,13 +12,11 @@ import org.jetbrains.exposed.sql.transactions.transaction
 object UserAccount : Table() {
     val UserName = text("UserName").primaryKey()
     val UserPassword = text("UserPassword")
-    val authority = integer("Authority")
 }
 
 data class SQL(var UserName: String, var UserPassword: String) {
 
     fun CheckInside(account: String){
-
     }
 }
 
@@ -35,7 +33,7 @@ fun initDatabase() {
 
 const val BCRYPT_COST = 15
 
-public object PasswordHasher {
+object PasswordHasher {
     fun hashPassword(password: String) =
         BCrypt.withDefaults().hashToString(
             BCRYPT_COST,

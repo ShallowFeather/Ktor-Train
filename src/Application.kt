@@ -60,25 +60,25 @@ fun Application.module() {
     routing {
 
         post("/login") {
-            val User = call.receive<User>()
-            var userId: String? =null
+            val userLoginDTO = call.receive<User>()
+            var userId: String? = null
             transaction {
-                val userData = UserAccount.select { UserAccount.UserName.eq(User.Name) }.firstOrNull()
+                val userData = UserAccount.select { UserAccount.UserName.eq(userLoginDTO.Name) }.firstOrNull()
 
-                if (userData == null)
-                    throw BadRequestException("Authentication Error.")
-                if (!PasswordHasher.verifyPassword(
-                        User.Password,
-                        userData[UserAccount.UserPassword]
-                    ).verified) {
+                if (userData == null) throw BadRequestException("Authentication Error.")
+                if (!PasswordHasher.verifyPassword.verified(
+                        userLoginDTO.Password,
+                        userData?.get(UserAccount.UserPassword)
+                    )) {
                     throw BadRequestException("Authentication Error.")
                 }
 
                 userId = userData.get(UserAccount.UserName)
             }
+
             if (userId == null) throw BadRequestException("Authentication Error.")
 
-            call.sessions.set("login_data", UserIdAuthorityPrincipal(User.Name))
+            call.sessions.set("login_data", UserIdAuthorityPrincipal(userId.toString()))
             call.respond(mapOf("OK" to true))
         }
 
@@ -93,7 +93,7 @@ fun Application.module() {
                 transaction {
                     UserAccount.insert {
                         it[UserName] = UserInformation.Name
-                        it[UserPassword] = PasswordHasher.hashPassword(UserInformation.Password).toString()
+                        it[UserPassword] = PasswordHasher.hashPassword(UserInformation.Password)
                     }
                 }
             }catch (error: Exception){
