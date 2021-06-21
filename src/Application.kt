@@ -66,10 +66,11 @@ fun Application.module() {
                 val userData = UserAccount.select { UserAccount.UserName.eq(userLoginDTO.Name) }.firstOrNull()
 
                 if (userData == null) throw BadRequestException("Authentication Error.")
-                if (!PasswordHasher.verifyPassword.verified(
+
+                if (!PasswordHasher.verifyPassword(
                         userLoginDTO.Password,
                         userData?.get(UserAccount.UserPassword)
-                    )) {
+                    ).verified) {
                     throw BadRequestException("Authentication Error.")
                 }
 
@@ -78,7 +79,7 @@ fun Application.module() {
 
             if (userId == null) throw BadRequestException("Authentication Error.")
 
-            call.sessions.set("login_data", UserIdAuthorityPrincipal(userId.toString()))
+            call.sessions.set("login_data", UserIdPrincipal(userId!!))
             call.respond(mapOf("OK" to true))
         }
 
