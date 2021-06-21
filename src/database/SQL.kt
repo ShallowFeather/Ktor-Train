@@ -1,5 +1,6 @@
 package com.example.database
 
+import at.favre.lib.crypto.bcrypt.BCrypt
 import com.example.database.UserAccount.primaryKey
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -29,4 +30,20 @@ fun initDatabase() {
     transaction {
         SchemaUtils.create(UserAccount)
     }
+}
+
+const val BCRYPT_COST = 15
+
+object PasswordHasher {
+    fun hashPassword(password: String) =
+        BCrypt.withDefaults().hashToString(
+            BCRYPT_COST,
+            password.toCharArray()
+        )
+
+    fun verifyPassword(password: String, passwordHash: String) =
+        BCrypt.verifyer().verify(
+            password.toCharArray(),
+            passwordHash
+        )
 }

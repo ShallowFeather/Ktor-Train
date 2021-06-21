@@ -44,7 +44,7 @@ fun Application.module() {
             transaction {
                     UserAccount.insert {
                         it[UserName] = UserInformation.Name
-                        it[UserPassword] = UserInformation.Password
+                        it[UserPassword] = PasswordHasher.hashPassword(UserInformation.Password)
                     }
             }
             call.respond(mapOf(
