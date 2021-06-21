@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="76e953a6-a64a-4e30-97ff-c542f3b897b9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/BackEnd/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +63,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/BackEnd" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="9yebskuq" />
@@ -88,19 +87,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Gradle.Web Api [run]">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Web Api [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -144,6 +130,7 @@
       <workItem from="1624214830102" duration="9237000" />
       <workItem from="1624227495150" duration="18998000" />
       <workItem from="1624266970870" duration="5241000" />
+      <workItem from="1624302619729" duration="317000" />
     </task>
     <servers />
   </component>
