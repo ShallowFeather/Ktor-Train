@@ -14,6 +14,7 @@ import io.ktor.client.engine.apache.*
 import io.ktor.client.engine.jetty.*
 import java.util.*
 import com.example.database.*
+import io.ktor.sessions.*
 import org.jetbrains.exposed.sql.Database.*
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -31,6 +32,16 @@ fun Application.module() {
             enable(SerializationFeature.INDENT_OUTPUT) // 美化输出 JSON
         }
     }
+
+    install(Sessions) {
+        cookie<UserIdPrincipal>(
+            "login_data",
+            storage = SessionStorageMemory()
+        ) {
+            cookie.path = "/"
+        }
+    }
+    
     initDatabase()
     routing {
         post ("/login"){
