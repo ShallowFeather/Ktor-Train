@@ -1,0 +1,7 @@
+POST http://127.0.0.1:8080/create
+Content-Type: application/json
+
+{
+    "Name": "SFeather",
+    "Password": "58005089"
+}
